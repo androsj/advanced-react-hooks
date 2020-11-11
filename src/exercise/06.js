@@ -1,12 +1,19 @@
 // useDebugValue: useMedia
 // http://localhost:3000/isolated/exercise/06.js
 
+// LESSONS: 2nd parameter (format) handy for heavy computations
+// runs only when dev tools are open
+
 import * as React from 'react'
+
+function formatQuery({query, state}) {
+  return `\`${query}\` => ${state}`
+}
 
 function useMedia(query, initialState = false) {
   const [state, setState] = React.useState(initialState)
-  // 🐨 call React.useDebugValue here.
-  // 💰 here's the formatted label I use: `\`${query}\` => ${state}`
+  // React.useDebugValue(`\`${query}\` => ${state}`)
+  React.useDebugValue({query, state}, formatQuery)
 
   React.useEffect(() => {
     let mounted = true
